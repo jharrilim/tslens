@@ -1,7 +1,7 @@
-import { TSLensConfiguration } from './TSLensConfiguration';
-import Project, { Options } from 'ts-simple-ast';
+import { TSLensConfiguration } from './ts-lens-configuration';
+import { Project, ProjectOptions } from 'ts-morph';
 import * as vscode from 'vscode';
-import fs = require('fs');
+import fs from 'fs';
 
 
 export class AppConfiguration {
@@ -12,19 +12,19 @@ export class AppConfiguration {
   constructor() {
     if (vscode.workspace.rootPath) {
 
-      let options: Options = {
+      const options: ProjectOptions = {
         tsConfigFilePath: this.settings.tsConfigPath || (vscode.workspace.rootPath + '/tsconfig.json'),
         addFilesFromTsConfig: true
       };
 
-      const exists = fs.existsSync(options.tsConfigFilePath); 
-      if(exists) {
+      const exists = fs.existsSync(options.tsConfigFilePath);
+      if (exists) {
         this.project = new Project(options);
       } else {
         this.project = new Project();
       }
     }
-    vscode.workspace.onDidChangeConfiguration(e => {
+    vscode.workspace.onDidChangeConfiguration(_ => {
       this.cachedSettings = null;
     });
   }
@@ -35,9 +35,9 @@ export class AppConfiguration {
 
   get settings(): TSLensConfiguration {
     if (!this.cachedSettings) {
-      var settings = vscode.workspace.getConfiguration(this.extensionName);
+      const settings = vscode.workspace.getConfiguration(this.extensionName);
       this.cachedSettings = new TSLensConfiguration();
-      for (var propertyName in this.cachedSettings) {
+      for (const propertyName in this.cachedSettings) {
         if (settings.has(propertyName)) {
           this.cachedSettings[propertyName] = settings.get(propertyName);
         }

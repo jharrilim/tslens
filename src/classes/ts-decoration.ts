@@ -1,4 +1,4 @@
-import { Range, TextEditorDecorationType } from "vscode";
+import { Range, TextEditorDecorationType } from 'vscode';
 
 export class TSDecoration {
     ranges: Range[] = [];

@@ -1,17 +1,18 @@
-import { CodeLens, SymbolInformation } from "vscode";
+import { CodeLens, SymbolInformation } from 'vscode';
 import {
-    Range,
-    Command,
-    Uri
-  } from 'vscode';
-import { TSDecoration } from "./TSDecoration";
-import { MethodDeclaration, PropertyDeclaration, PropertySignature, MethodSignature } from "ts-simple-ast";
+  Range,
+  Command,
+  Uri
+} from 'vscode';
+import { TSDecoration } from "./ts-decoration";
+import { MethodDeclaration, PropertyDeclaration, PropertySignature, MethodSignature } from 'ts-morph';
+
 export class MethodReferenceLens extends CodeLens {
   uri: Uri;
   decoration: TSDecoration;
   isClassed: boolean;
   isInterface: boolean;
-  symbolInfo: SymbolInformation;
+  symbol: SymbolInformation;
   testName: string;
   classInd: Array<PropertyDeclaration | MethodDeclaration>;
   interfaceInd: Array<PropertySignature | MethodSignature>;
@@ -21,6 +22,6 @@ export class MethodReferenceLens extends CodeLens {
     super(range, command);
     this.uri = uri;
     this.decoration = decoration;
-    this.symbolInfo = symbol;
+    this.symbol = symbol;
   }
 }

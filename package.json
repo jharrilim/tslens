@@ -158,15 +158,15 @@
     }
   },
   "devDependencies": {
-    "typescript": "2.9.1",
-    "@types/minimatch": "^3.0.1",
-    "@types/node": "10.3.2",
+    "typescript": "3.7.3",
+    "@types/minimatch": "^3.0.3",
+    "@types/node": "12.12.17",
     "@types/linq": "2.2.33"
   },
   "dependencies": {
-    "vscode": "^1.1.21",
+    "linq": "3.2.1",
     "minimatch": "^3.0.4",
-    "ts-simple-ast": "^16.0.2",
-    "linq": "3.1.0"
+    "ts-morph": "^6.0.2",
+    "vscode": "^1.1.36"
   }
 }
